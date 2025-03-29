@@ -26,11 +26,26 @@ jobs:
           pip install robotframework-seleniumlibrary
 
       - name: 🚀 Run All Robot Framework Tests
+        id: run-tests
         run: |
-          robot --outputdir results tests/
+          robot --outputdir results tests/ || echo "TESTS_FAILED=true" >> $GITHUB_ENV
 
       - name: 📁 Upload Test Results (Artifacts)
         uses: actions/upload-artifact@v3
         with:
           name: robot-results
           path: results/
+
+      - name: 📩 Send Notification to Mattermost
+        if: always()  # Runs this step even if tests fail
+        env:
+          MM_WEBHOOK_URL: ${{ secrets.MATTERMOST_WEBHOOK }}
+        run: |
+          STATUS="✅ Tests Passed"
+          if [ "$TESTS_FAILED" = "true" ]; then
+            STATUS="❌ Tests Failed"
+          fi
+
+          MESSAGE="🚀 *Robot Framework Test Run Completed* \n\n **Status:** $STATUS \n🔗 [View Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+
+          curl -X POST -H 'Content-Type: application/json' -d "{\"text\": \"$MESSAGE\"}" $MM_WEBHOOK_URL
