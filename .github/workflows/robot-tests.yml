@@ -1,0 +1,36 @@
+name: Run Robot Framework Tests
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # Runs every day at midnight UTC
+  workflow_dispatch:  # Allows manual execution
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🛠 Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: 📦 Install Dependencies
+        run: |
+          pip install robotframework robotframework-seleniumlibrary
+          sudo apt update
+          sudo apt install -y google-chrome-stable
+          pip install robotframework-seleniumlibrary
+
+      - name: 🚀 Run All Robot Framework Tests
+        run: |
+          robot --outputdir results tests/
+
+      - name: 📁 Upload Test Results (Artifacts)
+        uses: actions/upload-artifact@v3
+        with:
+          name: robot-results
+          path: results/
