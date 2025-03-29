@@ -30,11 +30,6 @@ jobs:
         run: |
           robot --outputdir results tests/ || echo "TESTS_FAILED=true" >> $GITHUB_ENV
 
-      - name: 📁 Upload Test Results (Artifacts)
-        uses: actions/upload-artifact@v3
-        with:
-          name: robot-results
-          path: results/
 
       - name: 📩 Send Notification to Mattermost
         if: always()  # Runs this step even if tests fail
