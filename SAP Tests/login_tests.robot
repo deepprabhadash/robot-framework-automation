@@ -1,10 +1,11 @@
 *** Settings ***
-Library           SAPGUI
+Library    DotEnv    .env
+Library    SAPGUI
 
 *** Variables ***
 ${SAP_SERVER}      /H/10.10.10.10/S/3200
-${USERNAME}        SCM_USER
-${PASSWORD}        SCM_PASS
+${USERNAME}      ${ENV_SAP_USERNAME}
+${PASSWORD}      ${ENV_SAP_PASSWORD}
 
 *** Test Cases ***
 Login to SAP SCM
