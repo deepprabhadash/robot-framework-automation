@@ -1,11 +1,11 @@
 *** Settings ***
-Library    DotEnv    .env
-Library    SAPGUI
+Library    YAML
 
 *** Variables ***
-${SAP_SERVER}      /H/10.10.10.10/S/3200
-${USERNAME}      ${ENV_SAP_USERNAME}
-${PASSWORD}      ${ENV_SAP_PASSWORD}
+${CREDENTIALS}    Load YAML    credentials.yaml
+${USERNAME}       ${CREDENTIALS.sap.username}
+${PASSWORD}       ${CREDENTIALS.sap.password}
+
 
 *** Test Cases ***
 Login to SAP SCM
