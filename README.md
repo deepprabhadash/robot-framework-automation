@@ -20,10 +20,10 @@ This repository contains **Robot Framework** automation scripts for **login and 
 This repository contains automated test cases for SAP SCM (Supply Chain Management) using **Robot Framework** and **SAP GUI Library**.
 
 ## Test Cases:
-1️⃣ Login to SAP SCM
-2️⃣ Navigate to Transaction (/SAPAPO/RRP3)
-3️⃣ Check Product Availability
-4️⃣ Logout from SAP
+✅ Login to SAP SCM
+✅ Navigate to Transaction (/SAPAPO/RRP3)
+✅ Check Product Availability
+✅ Logout from SAP
 
 ##  Setup Instructions:
 1️. Install Dependencies:
