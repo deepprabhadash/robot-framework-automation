@@ -25,8 +25,8 @@ This repository contains automated test cases for SAP SCM (Supply Chain Manageme
 3️⃣ Check Product Availability
 4️⃣ Logout from SAP
 
-## 🚀 Setup Instructions
-### 1️⃣ Install Dependencies
+##  Setup Instructions:
+1️. Install Dependencies:
 ```bash
 pip install robotframework
 pip install robotframework-SAPGUI
